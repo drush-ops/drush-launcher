@@ -2,7 +2,7 @@
     "name": "webflo/drush-shim",
     "description": "Provides a drush executable for your global PATH",
     "require": {
-        "webflo/drupal-finder": "dev-master"
+        "webflo/drupal-finder": "^0.0.1"
     },
     "conflict": {
         "drush/drush": "*"
