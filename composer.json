@@ -1,0 +1,19 @@
+{
+    "name": "webflo/drush-shim",
+    "description": "Provides a drush executable for your global PATH",
+    "require": {
+        "webflo/drupal-finder": "dev-master"
+    },
+    "conflict": {
+        "drush/drush": "*"
+    },
+    "authors": [
+        {
+            "name": "Florian Weber",
+            "email": "florian@webflo.org"
+        }
+    ],
+    "bin": [
+        "bin/drush"
+    ]
+}
