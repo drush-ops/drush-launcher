@@ -25,13 +25,13 @@ else {
 }
 
 $drupalFinder = new DrupalFinder();
-$drupalRoot = $drupalFinder->locateRoot(getcwd());
 
-if (!$drupalRoot) {
+if (!$drupalFinder->locateRoot(getcwd())) {
   echo 'Could not find Drupal in the current path.' . PHP_EOL;
   exit(1);
 }
 
+$drupalRoot = $drupalFinder->getDrupalRoot();
 chdir($drupalRoot);
 
 require_once $drupalRoot . '/autoload.php';
