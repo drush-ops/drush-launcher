@@ -24,30 +24,80 @@ else {
   exit(1);
 }
 
+$ROOT = FALSE;
+$DEBUG = FALSE;
+$VAR = FALSE;
+
+foreach ($_SERVER['argv'] as $arg) {
+  // If a variable to set was indicated on the
+  // previous iteration, then set the value of
+  // the named variable (e.g. "ROOT") to "$arg".
+  if ($VAR) {
+    $$VAR = "$arg";
+    $VAR = FALSE;
+  }
+  else {
+    switch ($arg) {
+      case "-r":
+        $VAR = "ROOT";
+        break;
+      case "--debug":
+        $DEBUG = TRUE;
+        break;
+    }
+    if (substr($arg, 0, 7) == "--root=") {
+      $ROOT = substr($arg, 7);
+    }
+  }
+}
+
+if ($ROOT === FALSE) {
+  $ROOT = getcwd();
+}
+
 $drupalFinder = new DrupalFinder();
 
-if (!$drupalFinder->locateRoot(getcwd())) {
+if ($DEBUG) {
+  echo "ROOT: " . $ROOT . PHP_EOL;
+}
+
+if (!$drupalFinder->locateRoot($ROOT)) {
   echo 'Could not find Drupal in the current path.' . PHP_EOL;
   exit(1);
 }
 
 $drupalRoot = $drupalFinder->getDrupalRoot();
+
+if ($DEBUG) {
+  echo "DRUPAL ROOT: " . $drupalRoot . PHP_EOL;
+}
+
 chdir($drupalRoot);
 
 require_once $drupalRoot . '/autoload.php';
 
-$files = [
-  $drupalRoot . '/../vendor/drush/drush/includes/preflight.inc',
-  $drupalRoot . '/../vendor/drush/drush/includes/context.inc'
+$methods = [
+  'local' => [
+    $drupalRoot . '/../vendor/drush/drush/includes/preflight.inc',
+    $drupalRoot . '/../vendor/drush/drush/includes/context.inc'
+  ],
+  'phar' => [
+    'phar://' .  __DIR__ . '/../phar/drush.phar/includes/preflight.inc',
+    'phar://' .  __DIR__ . '/../phar/drush.phar/includes/context.inc',
+  ]
 ];
 
-foreach ($files as $file) {
-  if (file_exists($file)) {
-    require_once $file;
+$bootstrapped = FALSE;
+
+foreach ($methods as $files) {
+  foreach ($files as $file) {
+    if (file_exists($file)) {
+      require_once $file;
+      $bootstrapped = TRUE;
+    }
   }
-  else {
-    echo 'The Drupal site has not local drush.' . PHP_EOL;
-    exit(1);
+  if ($bootstrapped) {
+    break;
   }
 }
 
