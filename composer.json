@@ -1,6 +1,7 @@
 {
     "name": "webflo/drush-shim",
     "description": "Provides a drush executable for your global PATH",
+    "license": "GPL-2.0+",
     "require": {
         "webflo/drupal-finder": "^0.2.1"
     },

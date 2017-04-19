@@ -12,3 +12,7 @@ A site local Drush is the easiest solution to avoid dependency issues and your p
 composer global remove drush/drush
 composer global require webflo/drush-shim
 ```
+
+## License
+
+GPL-2.0+
