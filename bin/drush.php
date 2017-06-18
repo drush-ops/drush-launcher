@@ -1,6 +1,7 @@
 <?php
 
 use DrupalFinder\DrupalFinder;
+use Webmozart\PathUtil\Path;
 
 set_time_limit(0);
 
@@ -54,6 +55,9 @@ foreach ($_SERVER['argv'] as $arg) {
 if ($ROOT === FALSE) {
   $ROOT = getcwd();
 }
+else {
+  $ROOT = Path::canonicalize($ROOT);
+}
 
 $drupalFinder = new DrupalFinder();
 
@@ -70,6 +74,8 @@ $drupalRoot = $drupalFinder->getDrupalRoot();
 
 if ($DEBUG) {
   echo "DRUPAL ROOT: " . $drupalRoot . PHP_EOL;
+  echo "COMPOSER ROOT: " . $drupalFinder->getComposerRoot() . PHP_EOL;
+  echo "VENDOR ROOT: " . $drupalFinder->getVendorDir() . PHP_EOL;
 }
 
 chdir($drupalRoot);
