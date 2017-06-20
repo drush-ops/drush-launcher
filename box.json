@@ -1,0 +1,20 @@
+{
+  "main": "bin/drush.php",
+  "output": "drush.phar",
+  "finder": [
+    {
+      "name": "*.phar",
+      "in": "phar"
+    },
+    {
+      "name": "*.php",
+      "exclude": [
+        "Tests"
+      ],
+      "in": "vendor"
+    }
+  ],
+  "git-commit": "git-commit",
+  "git-version": "git-version",
+  "stub": true
+}
