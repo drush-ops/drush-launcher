@@ -6,6 +6,7 @@ php:
 
 before_script:
   - curl -LSs https://box-project.github.io/box2/installer.php | php
+  - composer install --no-interaction --no-progress
 
 script:
   - ./box.phar build
