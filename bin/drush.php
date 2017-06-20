@@ -25,9 +25,12 @@ else {
   exit(1);
 }
 
+$DRUSH_SHIM_VERSION = '@git-version@';
+
 $ROOT = FALSE;
 $DEBUG = FALSE;
 $VAR = FALSE;
+$VERSION = FALSE;
 
 foreach ($_SERVER['argv'] as $arg) {
   // If a variable to set was indicated on the
@@ -45,6 +48,9 @@ foreach ($_SERVER['argv'] as $arg) {
       case "--debug":
         $DEBUG = TRUE;
         break;
+      case "--version":
+        $VERSION = TRUE;
+        break;
     }
     if (substr($arg, 0, 7) == "--root=") {
       $ROOT = substr($arg, 7);
@@ -60,6 +66,10 @@ else {
 }
 
 $drupalFinder = new DrupalFinder();
+
+if ($VERSION || $DEBUG) {
+  echo "Drush Shim Version: {$DRUSH_SHIM_VERSION}" .  PHP_EOL;
+}
 
 if ($DEBUG) {
   echo "ROOT: " . $ROOT . PHP_EOL;

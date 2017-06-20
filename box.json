@@ -14,5 +14,7 @@
       "in": "vendor"
     }
   ],
+  "git-commit": "git-commit",
+  "git-version": "git-version",
   "stub": true
 }

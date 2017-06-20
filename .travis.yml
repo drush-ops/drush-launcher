@@ -1,0 +1,16 @@
+php: 7.0
+
+before_script:
+  - curl -LSs https://box-project.github.io/box2/installer.php | php
+
+script:
+  - .
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_API_KEY
+  file: build/drush.phar
+  skip_cleanup: true
+  on:
+    tags: true
+    php: '7.0'
