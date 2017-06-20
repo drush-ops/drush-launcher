@@ -4,7 +4,7 @@ before_script:
   - curl -LSs https://box-project.github.io/box2/installer.php | php
 
 script:
-  - .
+  - ./box.phar build
 
 deploy:
   provider: releases
@@ -13,4 +13,3 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    php: '7.0'
