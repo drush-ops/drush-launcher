@@ -17,13 +17,6 @@ chmod +x drush.phar
 sudo mv drush.phar /usr/local/bin/drush
 ```
 
-## Installation via Composer
-
-```
-composer global remove drush/drush
-composer global require webflo/drush-shim
-```
-
 ## License
 
 GPL-2.0+
