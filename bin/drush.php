@@ -2,6 +2,7 @@
 
 use DrupalFinder\DrupalFinder;
 use Webmozart\PathUtil\Path;
+use Humbug\SelfUpdate\Updater;
 
 set_time_limit(0);
 
@@ -31,6 +32,7 @@ $ROOT = FALSE;
 $DEBUG = FALSE;
 $VAR = FALSE;
 $VERSION = FALSE;
+$SELF_UPDATE = FALSE;
 
 foreach ($_SERVER['argv'] as $arg) {
   // If a variable to set was indicated on the
@@ -51,6 +53,9 @@ foreach ($_SERVER['argv'] as $arg) {
       case "--version":
         $VERSION = TRUE;
         break;
+      case "self-update":
+        $SELF_UPDATE = TRUE;
+        break;
     }
     if (substr($arg, 0, 7) == "--root=") {
       $ROOT = substr($arg, 7);
@@ -67,8 +72,28 @@ else {
 
 $drupalFinder = new DrupalFinder();
 
-if ($VERSION || $DEBUG) {
+if ($VERSION || $DEBUG || $SELF_UPDATE) {
   echo "Drush Shim Version: {$DRUSH_SHIM_VERSION}" .  PHP_EOL;
+}
+
+if ($SELF_UPDATE) {
+  if ($DRUSH_SHIM_VERSION === '@' . 'git-version' . '@') {
+    echo "Automatic update not supported.\n";
+    exit(1);
+  }
+  $updater = new Updater(null, false);
+  $updater->setStrategy(Updater::STRATEGY_GITHUB);
+  $updater->getStrategy()->setPackageName('webflo/drush-shim');
+  $updater->getStrategy()->setPharName('drush.phar');
+  $updater->getStrategy()->setCurrentLocalVersion($DRUSH_SHIM_VERSION);
+  try {
+    $result = $updater->update();
+    echo $result ? "Updated!\n" : "No update needed!\n";
+    exit(0);
+  } catch (\Exception $e) {
+    echo "Automatic update failed, please download the latest version from https://github.com/webflo/drush-shim/releases\n";
+    exit(1);
+  }
 }
 
 if ($DEBUG) {
