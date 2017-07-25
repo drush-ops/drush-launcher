@@ -118,7 +118,12 @@ if ($DEBUG) {
 
 chdir($drupalRoot);
 
-require_once $drupalRoot . '/autoload.php';
+if (file_exists($drupalRoot . '/autoload.php')) {
+  require_once $drupalRoot . '/autoload.php';
+}
+else {
+  require_once $drupalFinder->getVendorDir() . '/autoload.php';
+}
 
 $methods = [
   'local' => [
