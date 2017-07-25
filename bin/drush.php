@@ -109,7 +109,6 @@ if (!$drupalFinder->locateRoot($ROOT)) {
 }
 
 $drupalRoot = $drupalFinder->getDrupalRoot();
-$vendorRoot = $drupalFinder->getVendorDir();
 
 if ($DEBUG) {
   echo "DRUPAL ROOT: " . $drupalRoot . PHP_EOL;
@@ -119,7 +118,12 @@ if ($DEBUG) {
 
 chdir($drupalRoot);
 
-require_once $vendorRoot . '/autoload.php';
+if (file_exists($drupalRoot . '/autoload.php')) {
+  require_once $drupalRoot . '/autoload.php';
+}
+else {
+  require_once $drupalFinder->getVendorDir() . '/autoload.php';
+}
 
 $methods = [
   'local' => [
