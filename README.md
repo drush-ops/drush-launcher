@@ -8,7 +8,7 @@ A site local Drush is the easiest solution to avoid dependency issues and your p
 
 ## Installation
 
-```
+```Shell
 # Download latest stable release using the code below or browse to https://github.com/webflo/drush-shim/releases/latest.
 wget https://github.com/webflo/drush-shim/releases/download/0.2.4/drush.phar
 
