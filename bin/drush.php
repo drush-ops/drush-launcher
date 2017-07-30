@@ -128,7 +128,7 @@ else {
 if (!file_exists($drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc')) {
   echo 'The Drush launcher could not find a local Drush in your Drupal site.' . PHP_EOL;
   echo 'Please add Drush with Composer to your project.' . PHP_EOL;
-  echo 'Run \'composer require drush/drush\'' . PHP_EOL;
+  echo 'Run \'cd "' . $drupalFinder->getComposerRoot() . '" && composer require drush/drush\'' . PHP_EOL;
   exit(1);
 }
 require_once $drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc';
