@@ -3,10 +3,6 @@
   "output": "drush.phar",
   "finder": [
     {
-      "name": "*.phar",
-      "in": "phar"
-    },
-    {
       "name": "*.php",
       "exclude": [
         "Tests"
