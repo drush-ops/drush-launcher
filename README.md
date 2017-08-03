@@ -10,7 +10,7 @@ A site local Drush is the easiest solution to avoid dependency issues and your p
 
 ```Shell
 # Download latest stable release using the code below or browse to https://github.com/webflo/drush-shim/releases/latest.
-wget https://github.com/webflo/drush-shim/releases/download/0.2.6/drush.phar
+wget https://github.com/webflo/drush-shim/releases/download/0.2.7/drush.phar
 
 # Rename to `drush` instead of `php drush.phar`. Destination can be anywhere on $PATH. 
 chmod +x drush.phar
