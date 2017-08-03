@@ -117,16 +117,16 @@
         },
         {
             "name": "webflo/drupal-finder",
-            "version": "0.4.1",
+            "version": "0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webflo/drupal-finder.git",
-                "reference": "ec2a9ac737b28d5bf3f894aa59f3af4b929aab22"
+                "reference": "161da70ae1644f0a9f642d54e6b50c05277d1eb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webflo/drupal-finder/zipball/ec2a9ac737b28d5bf3f894aa59f3af4b929aab22",
-                "reference": "ec2a9ac737b28d5bf3f894aa59f3af4b929aab22",
+                "url": "https://api.github.com/repos/webflo/drupal-finder/zipball/161da70ae1644f0a9f642d54e6b50c05277d1eb9",
+                "reference": "161da70ae1644f0a9f642d54e6b50c05277d1eb9",
                 "shasum": ""
             },
             "require-dev": {
@@ -150,7 +150,7 @@
                 }
             ],
             "description": "Helper class to locate a Drupal installation from a given path.",
-            "time": "2017-07-27T17:23:02+00:00"
+            "time": "2017-08-01T19:37:17+00:00"
         },
         {
             "name": "webmozart/assert",
