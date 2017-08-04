@@ -26,7 +26,7 @@ else {
   exit(1);
 }
 
-$DRUSH_SHIM_VERSION = '@git-version@';
+$DRUSH_LAUNCHER_VERSION = '@git-version@';
 
 $ROOT = FALSE;
 $DEBUG = FALSE;
@@ -73,11 +73,11 @@ else {
 $drupalFinder = new DrupalFinder();
 
 if ($VERSION || $DEBUG || $SELF_UPDATE) {
-  echo "Drush Shim Version: {$DRUSH_SHIM_VERSION}" .  PHP_EOL;
+  echo "Drush Launcher Version: {$DRUSH_LAUNCHER_VERSION}" .  PHP_EOL;
 }
 
 if ($SELF_UPDATE) {
-  if ($DRUSH_SHIM_VERSION === '@' . 'git-version' . '@') {
+  if ($DRUSH_LAUNCHER_VERSION === '@' . 'git-version' . '@') {
     echo "Automatic update not supported.\n";
     exit(1);
   }
@@ -85,7 +85,7 @@ if ($SELF_UPDATE) {
   $updater->setStrategy(Updater::STRATEGY_GITHUB);
   $updater->getStrategy()->setPackageName('drush/drush-launcher');
   $updater->getStrategy()->setPharName('drush.phar');
-  $updater->getStrategy()->setCurrentLocalVersion($DRUSH_SHIM_VERSION);
+  $updater->getStrategy()->setCurrentLocalVersion($DRUSH_LAUNCHER_VERSION);
   try {
     $result = $updater->update();
     echo $result ? "Updated!\n" : "No update needed!\n";
