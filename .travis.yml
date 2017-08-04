@@ -20,5 +20,5 @@ deploy:
     - drush.phar
     - drush.version
   on:
-    repo: webflo/drush-shim
+    repo: drush-ops/drush-launcher
     tags: true
