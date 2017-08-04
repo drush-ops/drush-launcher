@@ -83,7 +83,7 @@ if ($SELF_UPDATE) {
   }
   $updater = new Updater(null, false);
   $updater->setStrategy(Updater::STRATEGY_GITHUB);
-  $updater->getStrategy()->setPackageName('webflo/drush-shim');
+  $updater->getStrategy()->setPackageName('drush/drush-launcher');
   $updater->getStrategy()->setPharName('drush.phar');
   $updater->getStrategy()->setCurrentLocalVersion($DRUSH_SHIM_VERSION);
   try {
@@ -91,7 +91,7 @@ if ($SELF_UPDATE) {
     echo $result ? "Updated!\n" : "No update needed!\n";
     exit(0);
   } catch (\Exception $e) {
-    echo "Automatic update failed, please download the latest version from https://github.com/webflo/drush-shim/releases\n";
+    echo "Automatic update failed, please download the latest version from https://github.com/drush-ops/drush-launcher/releases\n";
     exit(1);
   }
 }
