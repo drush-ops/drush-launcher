@@ -1,5 +1,5 @@
 {
-    "name": "webflo/drush-shim",
+    "name": "drush/drush-launcher",
     "description": "Provides a drush executable for your global PATH",
     "license": "GPL-2.0+",
     "require": {
