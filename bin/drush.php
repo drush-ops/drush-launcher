@@ -125,30 +125,14 @@ else {
   require_once $drupalFinder->getVendorDir() . '/autoload.php';
 }
 
-$methods = [
-  'local' => [
-    $drupalRoot . '/../vendor/drush/drush/includes/preflight.inc',
-    $drupalRoot . '/../vendor/drush/drush/includes/context.inc'
-  ],
-  'phar' => [
-    'phar://' .  __DIR__ . '/../phar/drush.phar/includes/preflight.inc',
-    'phar://' .  __DIR__ . '/../phar/drush.phar/includes/context.inc',
-  ]
-];
-
-$bootstrapped = FALSE;
-
-foreach ($methods as $files) {
-  foreach ($files as $file) {
-    if (file_exists($file)) {
-      require_once $file;
-      $bootstrapped = TRUE;
-    }
-  }
-  if ($bootstrapped) {
-    break;
-  }
+if (!file_exists($drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc')) {
+  echo 'The Drush launcher could not find a local Drush in your Drupal site.' . PHP_EOL;
+  echo 'Please add Drush with Composer to your project.' . PHP_EOL;
+  echo 'Run \'cd "' . $drupalFinder->getComposerRoot() . '" && composer require drush/drush\'' . PHP_EOL;
+  exit(1);
 }
+require_once $drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc';
+require_once $drupalFinder->getVendorDir() . '/drush/drush/includes/context.inc';
 
 drush_set_option('root', $drupalRoot);
 drush_set_option('local', TRUE);
