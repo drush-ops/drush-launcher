@@ -83,7 +83,7 @@ if ($SELF_UPDATE) {
   }
   $updater = new Updater(null, false);
   $updater->setStrategy(Updater::STRATEGY_GITHUB);
-  $updater->getStrategy()->setPackageName('drush-ops/drush-launcher');
+  $updater->getStrategy()->setPackageName('drush/drush-launcher');
   $updater->getStrategy()->setPharName('drush.phar');
   $updater->getStrategy()->setCurrentLocalVersion($DRUSH_SHIM_VERSION);
   try {
