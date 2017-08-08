@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0dc3bedb0c5b16a54bc64abd0c2bb2cd",
+    "content-hash": "600df5bd53e8c0845b243bbcea765f2a",
     "packages": [
         {
             "name": "padraic/humbug_get_contents",
@@ -117,16 +117,16 @@
         },
         {
             "name": "webflo/drupal-finder",
-            "version": "0.4.2",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webflo/drupal-finder.git",
-                "reference": "161da70ae1644f0a9f642d54e6b50c05277d1eb9"
+                "reference": "3216448cc347bc77127fa3bf6497ba9b3c296e9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webflo/drupal-finder/zipball/161da70ae1644f0a9f642d54e6b50c05277d1eb9",
-                "reference": "161da70ae1644f0a9f642d54e6b50c05277d1eb9",
+                "url": "https://api.github.com/repos/webflo/drupal-finder/zipball/3216448cc347bc77127fa3bf6497ba9b3c296e9c",
+                "reference": "3216448cc347bc77127fa3bf6497ba9b3c296e9c",
                 "shasum": ""
             },
             "require-dev": {
@@ -150,7 +150,7 @@
                 }
             ],
             "description": "Helper class to locate a Drupal installation from a given path.",
-            "time": "2017-08-01T19:37:17+00:00"
+            "time": "2017-08-08T08:31:26+00:00"
         },
         {
             "name": "webmozart/assert",
