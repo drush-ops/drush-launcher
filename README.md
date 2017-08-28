@@ -10,7 +10,7 @@ A site local Drush is the easiest solution to avoid dependency issues and your p
 
 ```Shell
 # Download latest stable release using the code below or browse to https://github.com/drush-ops/drush-launcher/releases/latest.
-wget https://github.com/drush-ops/drush-launcher/releases/download/0.3.1/drush.phar
+wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.3.1/drush.phar
 
 # Rename to `drush` instead of `php drush.phar`. Destination can be anywhere on $PATH. 
 chmod +x drush.phar
