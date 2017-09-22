@@ -14,7 +14,7 @@ However, it is inconvenient to type `vendor/bin/drush` in order to execute Drush
 
     OSX:
     ```Shell
-    curl -O https://github.com/drush-ops/drush-launcher/releases/download/0.3.1/drush.phar
+    curl -OL https://github.com/drush-ops/drush-launcher/releases/download/0.3.1/drush.phar
     ```
 
     Linux:
