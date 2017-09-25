@@ -28,6 +28,14 @@ However, it is inconvenient to type `vendor/bin/drush` in order to execute Drush
     ```Shell
     sudo mv drush.phar /usr/local/bin/drush
     ```
+    
+## Update
+
+The Drush Launcher is able to self update to the latest release. 
+
+```Shell
+    drush self-update
+```
 
 ## License
 
