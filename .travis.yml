@@ -14,6 +14,8 @@ script:
 
 deploy:
   provider: releases
+  # Needed per https://stackoverflow.com/questions/41133548/how-to-fix-github-release-deployment-of-latex-project.
+  skip_cleanup: true
   api_key:
     secure: kYbMenPE4yfmpDkOIlyfojPishC9XIKWq2NiidZ4sZNhoXIYFhmN1bDPYLrXOhKL+s3b9Q8UaJDduZM0i8k59ZcZCz2M3aG+oVD812SuZFE5jtQOej+YbcGfEP6qKMr/vEQOqfcHEpQZAif9BGiD3IZ325hYrRUCh6hqUApS1xXjLX6ZfxNCdS0+9Li7uwF1LoE6GCy8pJ1kcGkRUN/K5lP8IOgmtIKzb88Gb9NySdie4M9EBC4Eh5PJpCP9052lnd0ZrsbGireVbJfWlXy3MVp4olt5gTb6EghbGvsd6Cs6re7w+c+5bPfn//6ZopLVwL96mPnIvTCdSOLvprO6stoH6MG/KbPCB86RNFloTD7jK6T2maExShOYoJrfS1/G0wkLv9l/goPy3ZdIJSg2++yhhrM4HlTaszZZte3RFqty1fzM5mahO1Z5sCtfXJSle2WKais14/47CAoz3D5YvAtGYGIEUHKJajveG1pqUMBi/5urTdu+6EJO/YF/me5Zhniiy0fWi3UGIcULibxhVmqIH8nwYzQOi7BGLRV7JM3rD1xABPHpxzgobCE5CYfUBEdLZPrBpql/XFtuwXXjZPTeiEy5pg7y2zBg6D8avJ7WGqV9aL97F/iYup24WTpOFIx9qiGYpD1V6D1gBFKlj1rf9VEjF5/sOi7OEE/VVRM=
   file:
