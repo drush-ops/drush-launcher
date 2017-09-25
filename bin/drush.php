@@ -117,6 +117,8 @@ if ($DEBUG) {
 }
 
 chdir($drupalRoot);
+// This is required to fool drush_locate_root() into using $drupalRoot.
+$_SERVER['PWD'] = $drupalRoot;
 
 if (file_exists($drupalRoot . '/autoload.php')) {
   require_once $drupalRoot . '/autoload.php';
@@ -132,8 +134,5 @@ if (!file_exists($drupalFinder->getVendorDir() . '/drush/drush/includes/prefligh
   exit(1);
 }
 require_once $drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc';
-require_once $drupalFinder->getVendorDir() . '/drush/drush/includes/context.inc';
 
-drush_set_option('root', $drupalRoot);
-drush_set_option('local', TRUE);
 exit(drush_main());
