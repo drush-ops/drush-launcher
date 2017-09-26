@@ -32,6 +32,7 @@ $ROOT = FALSE;
 $DEBUG = FALSE;
 $VAR = FALSE;
 $VERSION = FALSE;
+$DRUSH_VERSION = 8; // Gets ovewritten later if Drush9 is detected.
 $SELF_UPDATE = FALSE;
 
 foreach ($_SERVER['argv'] as $arg) {
@@ -108,23 +109,29 @@ if (!$drupalFinder->locateRoot($ROOT)) {
   exit(1);
 }
 
-$drupalRoot = $drupalFinder->getDrupalRoot();
+if (file_exists(Path::join($drupalFinder->getVendorDir(), 'drush/drush/src/Preflight/Preflight.php'))) {
+  $DRUSH_VERSION = 9;
+}
 
+$drupalRoot = $drupalFinder->getDrupalRoot();
 if ($DEBUG) {
+  echo "DRUSH VERSION: " . $DRUSH_VERSION . PHP_EOL;
   echo "DRUPAL ROOT: " . $drupalRoot . PHP_EOL;
   echo "COMPOSER ROOT: " . $drupalFinder->getComposerRoot() . PHP_EOL;
   echo "VENDOR ROOT: " . $drupalFinder->getVendorDir() . PHP_EOL;
 }
 
-chdir($drupalRoot);
-// This is required to fool drush_locate_root() into using $drupalRoot.
-$_SERVER['PWD'] = $drupalRoot;
-
-if (file_exists($drupalRoot . '/autoload.php')) {
-  require_once $drupalRoot . '/autoload.php';
-}
-else {
-  require_once $drupalFinder->getVendorDir() . '/autoload.php';
+// MW: Under what conditions is this chdir needed?
+// Change into Drush root if we are not already inside there. We don't want to
+// change if we are in a particular sites directory, for example.
+$cwd = getcwd();;
+if (!Path::isBasePath($drupalRoot, $cwd)) {
+  if ($DEBUG) {
+    echo "Changing directory to " . $drupalRoot . " since CWD ($cwd) is not inside." . PHP_EOL;
+  }
+  // chdir($drupalRoot);
+  // This is required to fool drush_locate_root() into using $drupalRoot.
+  // $_SERVER['PWD'] = $drupalRoot;
 }
 
 if (!file_exists($drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc')) {
@@ -134,5 +141,21 @@ if (!file_exists($drupalFinder->getVendorDir() . '/drush/drush/includes/prefligh
   exit(1);
 }
 require_once $drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc';
+
+if ($DRUSH_VERSION == 8) {
+  if (file_exists($drupalRoot . '/autoload.php')) {
+    require_once $drupalRoot . '/autoload.php';
+  }
+  else {
+    require_once $drupalFinder->getVendorDir() . '/autoload.php';
+  }
+
+  require_once $drupalFinder->getVendorDir() . '/drush/drush/includes/context.inc';
+  drush_set_option('root', $drupalRoot);
+  drush_set_option('local', TRUE);
+}
+else {
+  // Nothing to do. Drush9 manages two autoloaders.
+}
 
 exit(drush_main());
