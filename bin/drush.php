@@ -105,7 +105,6 @@ if (!$drupalFinder->locateRoot($ROOT)) {
   echo 'The Drush launcher could not find a Drupal site to operate on. Please do *one* of the following:' . PHP_EOL;
   echo '  - Navigate to any where within your Drupal project and try again.' . PHP_EOL;
   echo '  - Add --root=/path/to/drupal so Drush knows where your site is located.' . PHP_EOL;
-  echo '  - Add a site alias so Drush knows where your site is located.' . PHP_EOL;
   exit(1);
 }
 
