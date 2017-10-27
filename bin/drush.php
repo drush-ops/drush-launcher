@@ -120,17 +120,6 @@ if ($DEBUG) {
   echo "VENDOR ROOT: " . $drupalFinder->getVendorDir() . PHP_EOL;
 }
 
-// MW: This chdir appears unneeded.
-// Change into Drush root if we are not already inside there. We don't want to
-// change if we are in a particular sites directory, for example.
-//$cwd = getcwd();;
-//if (!Path::isBasePath($drupalRoot, $cwd)) {
-//  if ($DEBUG) {
-//    echo "Changing directory to " . $drupalRoot . " since CWD ($cwd) is not inside." . PHP_EOL;
-//  }
-//  chdir($drupalRoot);
-//}
-
 if (!file_exists($drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc')) {
   echo 'The Drush launcher could not find a local Drush in your Drupal site.' . PHP_EOL;
   echo 'Please add Drush with Composer to your project.' . PHP_EOL;
