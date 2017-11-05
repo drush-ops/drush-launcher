@@ -32,6 +32,7 @@ $ROOT = FALSE;
 $DEBUG = FALSE;
 $VAR = FALSE;
 $VERSION = FALSE;
+$VERSION_LAUNCHER = FALSE;
 $DRUSH_VERSION = 8; // Gets ovewritten later if Drush9 is detected.
 $SELF_UPDATE = FALSE;
 
@@ -54,6 +55,9 @@ foreach ($_SERVER['argv'] as $arg) {
       case "--version":
         $VERSION = TRUE;
         break;
+      case "--drush-launcher-version":
+        $VERSION_LAUNCHER = TRUE;
+        break;
       case "self-update":
         $SELF_UPDATE = TRUE;
         break;
@@ -73,8 +77,12 @@ else {
 
 $drupalFinder = new DrupalFinder();
 
-if ($VERSION || $DEBUG || $SELF_UPDATE) {
+if ($VERSION || $VERSION_LAUNCHER || $DEBUG || $SELF_UPDATE) {
   echo "Drush Launcher Version: {$DRUSH_LAUNCHER_VERSION}" .  PHP_EOL;
+}
+
+if ($VERSION_LAUNCHER) {
+  exit(0);
 }
 
 if ($SELF_UPDATE) {
