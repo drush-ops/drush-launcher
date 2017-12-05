@@ -35,6 +35,7 @@ $VERSION = FALSE;
 $VERSION_LAUNCHER = FALSE;
 $DRUSH_VERSION = 8; // Gets ovewritten later if Drush9 is detected.
 $SELF_UPDATE = FALSE;
+$FALLBACK = FALSE;
 
 foreach ($_SERVER['argv'] as $arg) {
   // If a variable to set was indicated on the
@@ -64,6 +65,12 @@ foreach ($_SERVER['argv'] as $arg) {
     }
     if (substr($arg, 0, 7) == "--root=") {
       $ROOT = substr($arg, 7);
+    }
+    if (substr($arg, 0, 11) == "--fallback=") {
+      $FALLBACK = substr($arg, 11);
+    }
+    elseif (getenv('DRUSH_LAUNCHER_FALLBACK')) {
+      $FALLBACK = getenv('DRUSH_LAUNCHER_FALLBACK');
     }
   }
 }
@@ -129,6 +136,16 @@ if ($DEBUG) {
 }
 
 if (!file_exists($drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc')) {
+  // No site-local Drush found. Use fallback if specified.
+  if ($FALLBACK) {
+    $args = array_map('prepareArgument', $_SERVER['argv']);
+    $cmd = $FALLBACK . ' ' . implode(' ', $args);
+    if ($DEBUG) {
+      echo "Calling fallback: ". $cmd . PHP_EOL;
+    }
+    system($cmd, $exit_code);
+    exit($exit_code);
+  }
   echo 'The Drush launcher could not find a local Drush in your Drupal site.' . PHP_EOL;
   echo 'Please add Drush with Composer to your project.' . PHP_EOL;
   echo 'Run \'cd "' . $drupalFinder->getComposerRoot() . '" && composer require drush/drush\'' . PHP_EOL;
@@ -153,3 +170,20 @@ else {
 }
 
 exit(drush_main());
+
+/**
+ * Escape the argument unless it is not suitable for passing to the Drush fallback.
+ *
+ * @param string $argument
+ *
+ * @return string|void
+ */
+function prepareArgument($argument) {
+  static $first = true;
+  if ($first || substr($argument, 0, 11) == '--fallback=') {
+    // Skip first argument as it is the drush-launcher path.
+    $first = false;
+    return;
+  }
+  return escapeshellarg($argument);
+}
