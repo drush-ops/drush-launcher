@@ -8,7 +8,7 @@ In order to avoid dependency issues, it is best to require Drush on a per-projec
 
 However, it is inconvenient to type `vendor/bin/drush` in order to execute Drush commands.  By installing the drush launcher globally on your local machine, you can simply type `drush` on the command line, and the launcher will find and execute the project specific version of drush located in your project's `vendor` directory.
 
-## Installation
+## Installation - Phar
 
 1. Download latest stable release via CLI (code below) or browse to https://github.com/drush-ops/drush-launcher/releases/latest.
 
@@ -28,14 +28,15 @@ However, it is inconvenient to type `vendor/bin/drush` in order to execute Drush
     ```Shell
     sudo mv drush.phar /usr/local/bin/drush
     ```
-    
-## Update
-
-The Drush Launcher is able to self update to the latest release. 
+The Drush Launcher Phar is able to self update to the latest release.
 
 ```Shell
     drush self-update
 ```
+
+## Installation - Homebrew
+
+Mac OSX systems are welcome to use Homebrew to install - `brew install drush-launcher`. To upgrade, run `brew upgrade drush-launcher`.
 
 ## Alternatives
 
