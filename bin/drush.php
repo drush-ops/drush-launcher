@@ -86,6 +86,7 @@ $drupalFinder = new DrupalFinder();
 
 if ($VERSION || $VERSION_LAUNCHER || $DEBUG || $SELF_UPDATE) {
   echo "Drush Launcher Version: {$DRUSH_LAUNCHER_VERSION}" .  PHP_EOL;
+  echo "ROOT: " . $ROOT . PHP_EOL;
 }
 
 if ($VERSION_LAUNCHER) {
@@ -110,10 +111,6 @@ if ($SELF_UPDATE) {
     echo "Automatic update failed, please download the latest version from https://github.com/drush-ops/drush-launcher/releases\n";
     exit(1);
   }
-}
-
-if ($DEBUG) {
-  echo "ROOT: " . $ROOT . PHP_EOL;
 }
 
 if ($drupalFinder->locateRoot($ROOT)) {
