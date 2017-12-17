@@ -42,6 +42,14 @@ Mac OSX systems are welcome to use Homebrew to install - `brew install drush-lau
 
 If you only have one codebase on your system (typical with VMs, Docker, etc,), you should add `/path/to/vendor/bin` to your $PATH. Drush9 is smart enough to find the PROJECT_ROOT and DRUPAL_ROOT when it is run from the bin directory.
 
+## Fallback
+
+When a site-local Drush is not found, this launcher usually throws a helpful error.
+You may avoid the error and instead hand off execution to a global Drush (any version)
+by doing *either* of:
+
+1. Specify an environment variable: `DRUSH_LAUNCHER_FALLBACK=/path/to/drush`
+1. Specify an option: `--fallback=/path/to/drush`
 
 ## License
 

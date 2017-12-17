@@ -33,8 +33,9 @@ $DEBUG = FALSE;
 $VAR = FALSE;
 $VERSION = FALSE;
 $VERSION_LAUNCHER = FALSE;
-$DRUSH_VERSION = 8; // Gets ovewritten later if Drush9 is detected.
+$DRUSH_VERSION = NULL;
 $SELF_UPDATE = FALSE;
+$FALLBACK = FALSE;
 
 foreach ($_SERVER['argv'] as $arg) {
   // If a variable to set was indicated on the
@@ -64,6 +65,12 @@ foreach ($_SERVER['argv'] as $arg) {
     }
     if (substr($arg, 0, 7) == "--root=") {
       $ROOT = substr($arg, 7);
+    }
+    if (substr($arg, 0, 11) == "--fallback=") {
+      $FALLBACK = substr($arg, 11);
+    }
+    elseif (getenv('DRUSH_LAUNCHER_FALLBACK')) {
+      $FALLBACK = getenv('DRUSH_LAUNCHER_FALLBACK');
     }
   }
 }
@@ -109,47 +116,78 @@ if ($DEBUG) {
   echo "ROOT: " . $ROOT . PHP_EOL;
 }
 
-if (!$drupalFinder->locateRoot($ROOT)) {
-  echo 'The Drush launcher could not find a Drupal site to operate on. Please do *one* of the following:' . PHP_EOL;
-  echo '  - Navigate to any where within your Drupal project and try again.' . PHP_EOL;
-  echo '  - Add --root=/path/to/drupal so Drush knows where your site is located.' . PHP_EOL;
-  exit(1);
-}
+if ($drupalFinder->locateRoot($ROOT)) {
+  $drupalRoot = $drupalFinder->getDrupalRoot();
 
-if (file_exists(Path::join($drupalFinder->getVendorDir(), 'drush/drush/src/Preflight/Preflight.php'))) {
-  $DRUSH_VERSION = 9;
-}
-
-$drupalRoot = $drupalFinder->getDrupalRoot();
-if ($DEBUG) {
-  echo "DRUSH VERSION: " . $DRUSH_VERSION . PHP_EOL;
-  echo "DRUPAL ROOT: " . $drupalRoot . PHP_EOL;
-  echo "COMPOSER ROOT: " . $drupalFinder->getComposerRoot() . PHP_EOL;
-  echo "VENDOR ROOT: " . $drupalFinder->getVendorDir() . PHP_EOL;
-}
-
-if (!file_exists($drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc')) {
-  echo 'The Drush launcher could not find a local Drush in your Drupal site.' . PHP_EOL;
-  echo 'Please add Drush with Composer to your project.' . PHP_EOL;
-  echo 'Run \'cd "' . $drupalFinder->getComposerRoot() . '" && composer require drush/drush\'' . PHP_EOL;
-  exit(1);
-}
-require_once $drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc';
-
-if ($DRUSH_VERSION == 8) {
-  if (file_exists($drupalRoot . '/autoload.php')) {
-    require_once $drupalRoot . '/autoload.php';
+  // Detect Drush version
+  if (file_exists(Path::join($drupalFinder->getVendorDir(), 'drush/drush/src/Preflight/Preflight.php'))) {
+    $DRUSH_VERSION = 9;
   }
-  else {
-    require_once $drupalFinder->getVendorDir() . '/autoload.php';
+  elseif (file_exists($drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc')) {
+    $DRUSH_VERSION = 8;
   }
 
-  require_once $drupalFinder->getVendorDir() . '/drush/drush/includes/context.inc';
-  drush_set_option('root', $drupalRoot);
-  drush_set_option('local', TRUE);
-}
-else {
-  // Nothing to do. Drush9 manages two autoloaders.
+  if ($DEBUG) {
+    echo "DRUSH VERSION: " . $DRUSH_VERSION . PHP_EOL;
+    echo "DRUPAL ROOT: " . $drupalRoot . PHP_EOL;
+    echo "COMPOSER ROOT: " . $drupalFinder->getComposerRoot() . PHP_EOL;
+    echo "VENDOR ROOT: " . $drupalFinder->getVendorDir() . PHP_EOL;
+  }
+
+  if ($DRUSH_VERSION == 9) {
+    require_once $drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc';
+    // Drush 9 manages two autoloaders.
+    exit(drush_main());
+  }
+  if ($DRUSH_VERSION == 8) {
+    if (file_exists($drupalRoot . '/autoload.php')) {
+      require_once $drupalRoot . '/autoload.php';
+    }
+    else {
+      require_once $drupalFinder->getVendorDir() . '/autoload.php';
+    }
+    require_once $drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc';
+    require_once $drupalFinder->getVendorDir() . '/drush/drush/includes/context.inc';
+    drush_set_option('root', $drupalRoot);
+    drush_set_option('local', TRUE);
+    exit(drush_main());
+  }
+  if (!$DRUSH_VERSION && !$FALLBACK) {
+    echo 'The Drush launcher could not find a local Drush in your Drupal site.' . PHP_EOL;
+    echo 'Please add Drush with Composer to your project.' . PHP_EOL;
+    echo 'Run \'cd "' . $drupalFinder->getComposerRoot() . '" && composer require drush/drush\'' . PHP_EOL;
+    exit(1);
+  }
 }
 
-exit(drush_main());
+if ($FALLBACK) {
+  $args = array_map('prepareArgument', $_SERVER['argv']);
+  $cmd = $FALLBACK . ' ' . implode(' ', $args);
+  if ($DEBUG) {
+    echo "Calling fallback: ". $cmd . PHP_EOL;
+  }
+  system($cmd, $exit_code);
+  exit($exit_code);
+}
+
+echo 'The Drush launcher could not find a Drupal site to operate on. Please do *one* of the following:' . PHP_EOL;
+echo '  - Navigate to any where within your Drupal project and try again.' . PHP_EOL;
+echo '  - Add --root=/path/to/drupal so Drush knows where your site is located.' . PHP_EOL;
+exit(1);
+
+/**
+ * Escape the argument unless it is not suitable for passing to the Drush fallback.
+ *
+ * @param string $argument
+ *
+ * @return string|void
+ */
+function prepareArgument($argument) {
+  static $first = true;
+  if ($first || substr($argument, 0, 11) == '--fallback=') {
+    // Skip first argument as it is the drush-launcher path.
+    $first = false;
+    return;
+  }
+  return escapeshellarg($argument);
+}
