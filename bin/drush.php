@@ -1,5 +1,6 @@
 <?php
 
+use Composer\XdebugHandler\XdebugHandler;
 use DrupalFinder\DrupalFinder;
 use Webmozart\PathUtil\Path;
 use Humbug\SelfUpdate\Updater;
@@ -25,6 +26,10 @@ else {
   echo 'You must set up the project dependencies using `composer install`' . PHP_EOL;
   exit(1);
 }
+
+$xdebug = new XdebugHandler('drush', '--ansi');
+$xdebug->check();
+unset($xdebug);
 
 $DRUSH_LAUNCHER_VERSION = '@git-version@';
 

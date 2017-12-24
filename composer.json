@@ -5,7 +5,8 @@
     "require": {
         "webflo/drupal-finder": "^1.0",
         "webmozart/path-util": "^2.3",
-        "padraic/phar-updater": "^1.0"
+        "padraic/phar-updater": "^1.0",
+        "composer/xdebug-handler": "dev-master"
     },
     "conflict": {
         "drush/drush": "*"
