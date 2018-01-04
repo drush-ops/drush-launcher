@@ -48,7 +48,7 @@ When a site-local Drush is not found, this launcher usually throws a helpful err
 You may avoid the error and instead hand off execution to a global Drush (any version)
 by doing *either* of:
 
-1. Specify an environment variable: `DRUSH_LAUNCHER_FALLBACK=/path/to/drush`
+1. Export an environment variable: `export DRUSH_LAUNCHER_FALLBACK=/path/to/drush`
 1. Specify an option: `--fallback=/path/to/drush`
 
 ## License
