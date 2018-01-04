@@ -35,7 +35,7 @@ $VERSION = FALSE;
 $VERSION_LAUNCHER = FALSE;
 $DRUSH_VERSION = NULL;
 $SELF_UPDATE = FALSE;
-$FALLBACK = FALSE;
+$FALLBACK = getenv('DRUSH_LAUNCHER_FALLBACK') ?: FALSE;
 
 foreach ($_SERVER['argv'] as $arg) {
   // If a variable to set was indicated on the
@@ -68,9 +68,6 @@ foreach ($_SERVER['argv'] as $arg) {
     }
     if (substr($arg, 0, 11) == "--fallback=") {
       $FALLBACK = substr($arg, 11);
-    }
-    elseif (getenv('DRUSH_LAUNCHER_FALLBACK')) {
-      $FALLBACK = getenv('DRUSH_LAUNCHER_FALLBACK');
     }
   }
 }
