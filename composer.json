@@ -1,7 +1,7 @@
 {
     "name": "drush/drush-launcher",
     "description": "Provides a drush executable for your global PATH",
-    "license": "GPL-2.0+",
+    "license": "GPL-2.0-or-later",
     "require": {
         "webflo/drupal-finder": "^1.0",
         "webmozart/path-util": "^2.3",
