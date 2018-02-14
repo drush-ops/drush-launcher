@@ -166,7 +166,10 @@ if ($FALLBACK) {
   if ($DEBUG) {
     echo "Calling fallback: ". $cmd . PHP_EOL;
   }
-  system($cmd, $exit_code);
+  $process = proc_open($cmd, [0 => STDIN, 1 => STDOUT, 2 => STDERR], $pipes);
+  $proc_status = proc_get_status($process);
+  $exit_code = proc_close($process);
+  $exit_code = $proc_status["running"] ? $exit_code : $proc_status["exitcode"];
   exit($exit_code);
 }
 
