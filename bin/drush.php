@@ -146,7 +146,6 @@ if ($drupalFinder->locateRoot($ROOT)) {
     require_once $drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc';
     require_once $drupalFinder->getVendorDir() . '/drush/drush/includes/context.inc';
     drush_set_option('root', $drupalRoot);
-    drush_set_option('local', TRUE);
     exit(drush_main());
   }
   if (!$DRUSH_VERSION && !$FALLBACK) {
