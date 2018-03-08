@@ -126,9 +126,6 @@ if ($drupalFinder->locateRoot($ROOT)) {
   }
   elseif (file_exists($drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc')) {
     $DRUSH_VERSION = 8;
-    $xdebug = new XdebugHandler('drush');
-    $xdebug->check();
-    unset($xdebug);
   }
 
   if ($DEBUG) {
