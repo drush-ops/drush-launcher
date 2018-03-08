@@ -1,5 +1,6 @@
 <?php
 
+use Composer\XdebugHandler\XdebugHandler;
 use DrupalFinder\DrupalFinder;
 use Webmozart\PathUtil\Path;
 use Humbug\SelfUpdate\Updater;
@@ -119,6 +120,9 @@ if ($drupalFinder->locateRoot($ROOT)) {
   // Detect Drush version
   if (file_exists(Path::join($drupalFinder->getVendorDir(), 'drush/drush/src/Preflight/Preflight.php'))) {
     $DRUSH_VERSION = 9;
+    $xdebug = new XdebugHandler('drush', '--ansi');
+    $xdebug->check();
+    unset($xdebug);
   }
   elseif (file_exists($drupalFinder->getVendorDir() . '/drush/drush/includes/preflight.inc')) {
     $DRUSH_VERSION = 8;
