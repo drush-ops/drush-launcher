@@ -38,6 +38,15 @@ The Drush Launcher Phar is able to self update to the latest release.
 
 Mac OSX systems are welcome to use Homebrew to install - `brew install drush-launcher`. To upgrade, run `brew upgrade drush-launcher`.
 
+## Installation - Composer
+
+Drush Launcher can also be installed via Composer, which can be easier on some systems, especially where Composer binaries are already on the system `$PATH`.
+
+1. Run `composer global require drush/drush-launcher`.
+1. Make sure your Composer binary directory is in your path. The best way to do this will vary slightly based on OS:
+    1. On Mac, add the following line to `.bash_profile`: `export PATH="$PATH:$HOME/.composer/vendor/bin"`
+    1. On Ubuntu, add the following line to `.bashrc`: `PATH="$PATH:$HOME/.config/composer/vendor/bin"`
+
 ## Alternatives
 
 If you only have one codebase on your system (typical with VMs, Docker, etc,), you should add `/path/to/vendor/bin` to your $PATH. Drush9 is smart enough to find the PROJECT_ROOT and DRUPAL_ROOT when it is run from the bin directory.
