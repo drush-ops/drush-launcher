@@ -27,21 +27,21 @@ However, it is inconvenient to type `vendor/bin/drush` in order to execute Drush
 
     ```Shell
     sudo mv drush.phar /usr/local/bin/drush
-    ```    
+    ```
     
  In some setups it is better to move it to `~/bin/drush` (for example if you have installed drush via 
  `composer global require drush/drush` to `~/.composer/vendor/bin` and this project is on your path 
  before `/usr/local/bin`.
     
-    ```Shell
-    mv drush.phar ~/bin/drush
-    ```
+  ```Shell
+  mv drush.phar ~/bin/drush
+  ```
     
 The Drush Launcher Phar is able to self update to the latest release.
 
-```Shell
-    drush self-update
-```
+  ```Shell
+  drush self-update
+  ```
 
 ## Installation - Homebrew
 
