@@ -51,6 +51,10 @@ by doing *either* of:
 1. Export an environment variable: `export DRUSH_LAUNCHER_FALLBACK=/path/to/drush`
 1. Specify an option: `--fallback=/path/to/drush`
 
+## Xdebug compatibility
+
+Drush Launcher, like Composer automatically disables Xdebug by default. This improves performance substantially. You may override this feature by setting an environment variable. ``DRUSH_ALLOW_XDEBUG=1 drush [command]``
+
 ## License
 
 GPL-2.0+
