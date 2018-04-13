@@ -34,10 +34,6 @@ The Drush Launcher Phar is able to self update to the latest release.
     drush self-update
 ```
 
-## Installation - Homebrew
-
-Mac OSX systems are welcome to use Homebrew to install - `brew install drush-launcher`. To upgrade, run `brew upgrade drush-launcher`.
-
 ## Alternatives
 
 If you only have one codebase on your system (typical with VMs, Docker, etc,), you should add `/path/to/vendor/bin` to your $PATH. Drush9 is smart enough to find the PROJECT_ROOT and DRUPAL_ROOT when it is run from the bin directory.
