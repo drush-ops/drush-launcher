@@ -28,6 +28,14 @@ However, it is inconvenient to type `vendor/bin/drush` in order to execute Drush
     ```Shell
     sudo mv drush.phar /usr/local/bin/drush
     ```
+    
+1. Windows users: create a drush.bat file in the same folder as drush.phar with the following lines. This gets around the problem where Windows does not know that .phar files are associated with `php`:
+   
+   @echo off
+   php %~dp0\drush.phar %*
+
+## Update
+
 The Drush Launcher Phar is able to self update to the latest release.
 
 ```Shell
