@@ -31,8 +31,10 @@ However, it is inconvenient to type `vendor/bin/drush` in order to execute Drush
     
 1. Windows users: create a drush.bat file in the same folder as drush.phar with the following lines. This gets around the problem where Windows does not know that .phar files are associated with `php`:
    
-   @echo off
-   php %~dp0\drush.phar %*
+    ``` Bat
+    @echo off
+    php "%~dp0\drush.phar" %*
+    ```
 
 ## Update
 
