@@ -67,9 +67,6 @@ foreach ($_SERVER['argv'] as $arg) {
     if (substr($arg, 0, 7) == "--root=") {
       $ROOT = substr($arg, 7);
     }
-    if (substr($arg, 0, 11) == "--fallback=") {
-      $FALLBACK = substr($arg, 11);
-    }
   }
 }
 
@@ -187,7 +184,7 @@ exit(1);
  */
 function prepareArgument($argument) {
   static $first = true;
-  if ($first || substr($argument, 0, 11) == '--fallback=') {
+  if ($first) {
     // Skip first argument as it is the drush-launcher path.
     $first = false;
     return;
