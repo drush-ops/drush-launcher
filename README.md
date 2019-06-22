@@ -52,10 +52,9 @@ If you only have one codebase on your system (typical with VMs, Docker, etc,), y
 
 When a site-local Drush is not found, this launcher usually throws a helpful error.
 You may avoid the error and instead hand off execution to a global Drush (any version)
-by doing *either* of:
+by exporting an environment variable.
 
-1. Export an environment variable: `export DRUSH_LAUNCHER_FALLBACK=/path/to/drush`
-1. Specify an option: `--fallback=/path/to/drush`
+`export DRUSH_LAUNCHER_FALLBACK=/path/to/drush`
 
 ## Xdebug compatibility
 
