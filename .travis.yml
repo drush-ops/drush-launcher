@@ -14,13 +14,12 @@ script:
 
 deploy:
   provider: releases
-  # Needed per https://stackoverflow.com/questions/41133548/how-to-fix-github-release-deployment-of-latex-project.
-  skip_cleanup: true
   api_key:
-    secure: kYbMenPE4yfmpDkOIlyfojPishC9XIKWq2NiidZ4sZNhoXIYFhmN1bDPYLrXOhKL+s3b9Q8UaJDduZM0i8k59ZcZCz2M3aG+oVD812SuZFE5jtQOej+YbcGfEP6qKMr/vEQOqfcHEpQZAif9BGiD3IZ325hYrRUCh6hqUApS1xXjLX6ZfxNCdS0+9Li7uwF1LoE6GCy8pJ1kcGkRUN/K5lP8IOgmtIKzb88Gb9NySdie4M9EBC4Eh5PJpCP9052lnd0ZrsbGireVbJfWlXy3MVp4olt5gTb6EghbGvsd6Cs6re7w+c+5bPfn//6ZopLVwL96mPnIvTCdSOLvprO6stoH6MG/KbPCB86RNFloTD7jK6T2maExShOYoJrfS1/G0wkLv9l/goPy3ZdIJSg2++yhhrM4HlTaszZZte3RFqty1fzM5mahO1Z5sCtfXJSle2WKais14/47CAoz3D5YvAtGYGIEUHKJajveG1pqUMBi/5urTdu+6EJO/YF/me5Zhniiy0fWi3UGIcULibxhVmqIH8nwYzQOi7BGLRV7JM3rD1xABPHpxzgobCE5CYfUBEdLZPrBpql/XFtuwXXjZPTeiEy5pg7y2zBg6D8avJ7WGqV9aL97F/iYup24WTpOFIx9qiGYpD1V6D1gBFKlj1rf9VEjF5/sOi7OEE/VVRM=
+    secure: L2kB6OGsdb5ac9/EXY5RoTW//ZjspPwRIV8y3FsBjvtChCJiRhCIrKQbIe+agvTUe4aXF6XdhYSHMIRpyRBicyoYfQIw0VgtBm6nYYIBRzJ88kcVsZkHh0X/AmcomG+0aqXry//gpd8MIkslBpQchLWQigHsCYVRuAYKqj/wy4TGLUMwB0wdL8lHC8HUKXcnRizAHOoqPooJcum5edFlZJFRLoapWB44OqSbbMcSsOfRgi4SdoELFd3bQkCG0zc+OwRewtsHuTx7892bNb/dWK2jNdvQ9vnaCJxf6Wlnxu36K5YrE2TjKzgNQKLQmXMA1Xx7xqHb7ZDigp9dVk6TpBhxkrU3Z2/XHvj/F6W7RH2JG1bUjtVnR+K7tG5oOEACMAaFC4NdiCPzeXK1UtgzK0UDJ4WY1ZR62L6PwK2gCsASglTcx+u/iQybWl0gevVLD+HGiXqPC/XjuKQK4F2YZIcZLXloU3Qx1SOFh9tfcH6t44o4fNYVBb5of3PyBLA/seY/j7IWh5kZibQAO23CJTspvO7iSmWqtCr5SNCxjJSzHJscb2WWtvT+pt2i6BhmdBAuzefWgypJOzRG9U38lWg2PyNmpI5c9pe0dCRE11k9ALFuLH+n24lMPKPV8A1kd1a6CdfrND7yf41d6IJgePYgUN5QMG2ZlWPxfK8riyA=
   file:
     - drush.phar
     - drush.version
   on:
     repo: drush-ops/drush-launcher
     tags: true
+  skip_cleanup: true
