@@ -46,7 +46,7 @@ The Drush Launcher Phar is able to self update to the latest release.
 
 ## Alternatives
 
-If you only have one codebase on your system (typical with VMs, Docker, etc,), you should add `/path/to/vendor/bin` to your $PATH. Drush9 is smart enough to find the PROJECT_ROOT and DRUPAL_ROOT when it is run from the bin directory.
+If you only have one codebase on your system (typical with VMs, Docker, etc,), you should add `/path/to/vendor/bin` to your `$PAT`H. Drush9 is smart enough to find the `PROJECT_ROOT` and `DRUPAL_ROOT` when it is run from the bin directory.
 
 ## Fallback
 
