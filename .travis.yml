@@ -2,7 +2,7 @@ language: php
 sudo: false
 
 php:
-  - 7.1
+  - 7.4
 
 before_script:
   - composer box-install
