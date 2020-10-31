@@ -19,5 +19,13 @@
     ],
     "bin": [
         "bin/drush"
-    ]
+    ],
+    "scripts": {
+        "box-install": [
+            "curl -O -L https://github.com/box-project/box/releases/download/3.8.5/box.phar"
+        ],
+        "box-compile": [
+            "php box.phar compile"
+        ]
+    }
 }
