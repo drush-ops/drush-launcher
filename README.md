@@ -29,11 +29,11 @@ However, it is inconvenient to type `vendor/bin/drush` in order to execute Drush
     sudo mv drush.phar /usr/local/bin/drush
     ```
     
-1. Windows users: create a drush.bat file in the same folder as drush.phar with the following lines. This gets around the problem where Windows does not know that .phar files are associated with `php`:
+1. Windows users: create a drush.bat file in the same folder as drush.phar with the following lines. This gets around the problem where Windows does not know that the `drush` file is associated with `php`:
    
     ``` Bat
     @echo off
-    php "%~dp0\drush.phar" %*
+    php "%~dp0\drush" %*
     ```
 
 ## Update
