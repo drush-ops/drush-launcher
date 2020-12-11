@@ -41,10 +41,10 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
-        name: drush.phar
+        name: drush
         path: drush.phar
         
     - uses: actions/upload-artifact@v2
       with:
-        name: drush.version
+        name: drush
         path: drush.version
