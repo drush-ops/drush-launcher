@@ -5,8 +5,8 @@
     "require": {
         "webflo/drupal-finder": "^1.0",
         "webmozart/path-util": "^2.3",
-        "padraic/phar-updater": "^1.0",
-        "composer/xdebug-handler": "^1.0"
+        "composer/xdebug-handler": "^1.0",
+        "laravel-zero/phar-updater": "dev-main"
     },
     "conflict": {
         "drush/drush": "*"
@@ -22,7 +22,7 @@
     ],
     "scripts": {
         "box-install": [
-            "curl -O -L https://github.com/box-project/box/releases/download/3.8.5/box.phar"
+            "curl -O -L https://github.com/box-project/box/releases/download/3.11.1/box.phar"
         ],
         "box-compile": [
             "php box.phar compile"
