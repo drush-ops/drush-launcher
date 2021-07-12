@@ -46,7 +46,7 @@ The Drush Launcher Phar is able to self update to the latest release.
 
 ## Alternatives
 
-If you only have one codebase on your system (typical with VMs, Docker, etc,), you should add `/path/to/vendor/bin` to your `$PATH`. Drush 10 is smart enough to find the `PROJECT_ROOT` and `DRUPAL_ROOT` when it is run from the bin directory.
+Just add `/path/to/vendor/bin` to the front of your `$PATH`. This is trivial when you have only one Drupal codebase on your system (e.g. site is in Docker). When your system has multiple codebases, consider using [direnv](https://direnv.net/) to add to $PATH on a per-codebase basis. [An example .envrc file](https://gitlab.com/drupalspoons/composer-plugin/-/blob/master/.envrc.dist).
 
 ## Fallback
 
