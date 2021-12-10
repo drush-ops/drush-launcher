@@ -6,7 +6,7 @@
         "webflo/drupal-finder": "^1.0",
         "webmozart/path-util": "^2.3",
         "composer/xdebug-handler": "^1.0",
-        "laravel-zero/phar-updater": "dev-main"
+        "laravel-zero/phar-updater": "^1.1"
     },
     "conflict": {
         "drush/drush": "*"
