@@ -1,8 +1,8 @@
-# Drush Launcher
+## Alternatives now that this project is archived.
 
-A small wrapper around Drush for your global $PATH.
+Add `./vendor/bin` to the front of your `$PATH`. This relative path works for any Drupal codebase on your system if you run commands from the project root. And it is harmless otherwise. Other options include [direnv](https://direnv.net/), [fd](https://github.com/g1a/fd), or the scripts [in this issue](https://github.com/drush-ops/drush-launcher/issues/105).
 
-## Why?
+## Description
 
 In order to avoid dependency issues, it is best to require Drush on a per-project basis via Composer (`composer require drush/drush`). This makes Drush available to your project by placing it at `vendor/bin/drush`.
 
@@ -23,14 +23,14 @@ However, it is inconvenient to type `vendor/bin/drush` in order to execute Drush
     wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/latest/download/drush.phar
     ```
 1. Make downloaded file executable: `chmod +x drush.phar`
-1. Move drush.phar to a location listed in your `$PATH`, rename to `drush`: 
+1. Move drush.phar to a location listed in your `$PATH`, rename to `drush`:
 
     ```Shell
     sudo mv drush.phar /usr/local/bin/drush
     ```
-    
+
 1. Windows users: create a drush.bat file in the same folder as drush.phar with the following lines. This gets around the problem where Windows does not know that the `drush` file is associated with `php`:
-   
+
     ``` Bat
     @echo off
     php "%~dp0\drush" %*
@@ -43,10 +43,6 @@ The Drush Launcher Phar is able to self update to the latest release.
 ```Shell
     drush self-update
 ```
-
-## Alternatives
-
-Just add `/path/to/vendor/bin` to the front of your `$PATH`. This is trivial when you have only one Drupal codebase on your system (e.g. site is in Docker). When your system has multiple codebases, consider using [direnv](https://direnv.net/) to add to $PATH on a per-codebase basis. [An example .envrc file](https://gitlab.com/drupalspoons/composer-plugin/-/blob/master/.envrc.dist).
 
 ## Fallback
 
